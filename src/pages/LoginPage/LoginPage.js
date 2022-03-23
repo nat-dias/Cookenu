@@ -1,37 +1,36 @@
 import React from "react";
-import { InputsContainer, LogoImage, ScreenContainer } from "./styled";
+import { LogoImage, ScreenContainer, SignUpButtonContainer } from "./styled";
 import logo from "../../assets/logo.png"
-import TextField from "@material-ui/core/TextField"
-import useForm from '../../hooks/useForm'
+import { Button } from '@material-ui/core'
+import LoginForm from "./LoginForm"
+import { goToSignUp } from '../../routes/coordinator'
+import { useHistory } from "react-router-dom"
+import useUnprotectedPage from "../../hooks/useUnprotectedPage";
 
+const LoginPage = ({setRightButtonText}) => {
+    useUnprotectedPage()
+    const history = useHistory()
 
-
-const LoginPage = () =>{
-    const [form, onChange, clear] = useForm({email: "", password: ""})
-
-    const onSubmitForm = () => {
-
-    }
     return (
         <ScreenContainer>
-            <LogoImage src={logo}/>
-            <InputsContainer>
-            <form onSubmit={onSubmitForm}>
-                <TextField
-                name={"email"}
-                value={form.email}
-                onChange={onChange}
-                />
+            <LogoImage src={logo} />
+            <LoginForm setRightButtonText={setRightButtonText} />
+            <SignUpButtonContainer>
+                <Button
+                    onClick={() => goToSignUp(history)}
+                    type={"submit"}
+                    fullWidth
+                    variant={"text"}
+                    color={"primary"}
+                    margin={"normal"}
+                >
+                    Não possui conta? Cadastre-se
+                </Button>
+            </SignUpButtonContainer>
 
-                <TextField
-                name={"password"}
-                value={form.password}
-                onChange={onChange}
-                />
-            </form>
-            </InputsContainer>
         </ScreenContainer>
     )
 }
+
 
 export default LoginPage

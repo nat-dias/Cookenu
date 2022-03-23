@@ -14,6 +14,5 @@ const useForm = (initialState) => {
     }
 
     return [form, handleInputChange, clear]
-
 }
 export default useForm
